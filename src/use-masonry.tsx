@@ -55,7 +55,7 @@ export function useMasonry<Item>({
   const measuredCount = size()
   const shortestColumnSize = shortestColumn()
   const children: React.ReactElement[] = []
-  const itemRole = role + 'item'
+  const itemRole = role
   const storedOnRender = useLatest(onRender)
 
   overscanBy = height * overscanBy
@@ -93,6 +93,7 @@ export function useMasonry<Item>({
           key={key}
           ref={setItemRef(index)}
           role={itemRole}
+          tabIndex={index}
           style={
             typeof itemStyle === 'object' && itemStyle !== null
               ? Object.assign({}, phaseTwoStyle, itemStyle)
