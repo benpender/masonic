@@ -1,1 +1,1 @@
-export const elementsCache = /*#__PURE__*/ new WeakMap()
+export const elementsCache = /*#__PURE__*/new WeakMap();

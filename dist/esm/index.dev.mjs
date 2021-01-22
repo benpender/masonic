@@ -160,8 +160,8 @@ function useMasonry(_ref) {
     children.push( /*#__PURE__*/__reactCreateElement__(ItemComponent, {
       key: key,
       ref: setItemRef(index),
-      role: itemRole,
       tabIndex: index,
+      role: itemRole,
       style: typeof itemStyle === 'object' && itemStyle !== null ? Object.assign({}, phaseTwoStyle, itemStyle) : phaseTwoStyle
     }, createRenderElement(RenderComponent, index, data, columnWidth)));
 
@@ -192,6 +192,7 @@ function useMasonry(_ref) {
         key: key,
         ref: setItemRef(_index),
         role: itemRole,
+        tabIndex: index,
         style: typeof itemStyle === 'object' ? Object.assign({}, phaseOneStyle, itemStyle) : phaseOneStyle
       }, createRenderElement(RenderComponent, _index, _data, columnWidth)));
     }

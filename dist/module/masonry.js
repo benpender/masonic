@@ -1,11 +1,11 @@
-import * as React from 'react'
-const __reactCreateElement__ = React.createElement
-import {useWindowSize} from '@react-hook/window-size'
-import {MasonryScroller} from './masonry-scroller'
-import {useContainerPosition} from './use-container-position'
-import {useResizeObserver} from './use-resize-observer'
-import {usePositioner} from './use-positioner'
-import {useScrollToIndex} from './use-scroll-to-index'
+import * as React from 'react';
+const __reactCreateElement__ = React.createElement;
+import { useWindowSize } from '@react-hook/window-size';
+import { MasonryScroller } from './masonry-scroller';
+import { useContainerPosition } from './use-container-position';
+import { useResizeObserver } from './use-resize-observer';
+import { usePositioner } from './use-positioner';
+import { useScrollToIndex } from './use-scroll-to-index';
 
 /**
  * A "batteries included" masonry grid which includes all of the implementation details below. This component is the
@@ -14,42 +14,32 @@ import {useScrollToIndex} from './use-scroll-to-index'
  * the height of the browser `window`.
  */
 export function Masonry(props) {
-  const containerRef = React.useRef(null)
+  const containerRef = React.useRef(null);
   const windowSize = useWindowSize({
     initialWidth: props.ssrWidth,
-    initialHeight: props.ssrHeight,
-  })
-  const containerPos = useContainerPosition(containerRef, windowSize)
-  const nextProps = Object.assign(
-    {
-      offset: containerPos.offset,
-      width: containerPos.width || windowSize[0],
-      height: windowSize[1],
-      containerRef,
-    },
-    props
-  )
-  nextProps.positioner = usePositioner(nextProps)
-  nextProps.resizeObserver = useResizeObserver(nextProps.positioner)
+    initialHeight: props.ssrHeight
+  });
+  const containerPos = useContainerPosition(containerRef, windowSize);
+  const nextProps = Object.assign({
+    offset: containerPos.offset,
+    width: containerPos.width || windowSize[0],
+    height: windowSize[1],
+    containerRef
+  }, props);
+  nextProps.positioner = usePositioner(nextProps);
+  nextProps.resizeObserver = useResizeObserver(nextProps.positioner);
   const scrollToIndex = useScrollToIndex(nextProps.positioner, {
     height: nextProps.height,
     offset: containerPos.offset,
-    align:
-      typeof props.scrollToIndex === 'object'
-        ? props.scrollToIndex.align
-        : void 0,
-  })
-  const index =
-    props.scrollToIndex &&
-    (typeof props.scrollToIndex === 'number'
-      ? props.scrollToIndex
-      : props.scrollToIndex.index)
+    align: typeof props.scrollToIndex === 'object' ? props.scrollToIndex.align : void 0
+  });
+  const index = props.scrollToIndex && (typeof props.scrollToIndex === 'number' ? props.scrollToIndex : props.scrollToIndex.index);
   React.useEffect(() => {
-    if (index !== void 0) scrollToIndex(index)
-  }, [index, scrollToIndex])
-  return __reactCreateElement__(MasonryScroller, nextProps)
+    if (index !== void 0) scrollToIndex(index);
+  }, [index, scrollToIndex]);
+  return __reactCreateElement__(MasonryScroller, nextProps);
 }
 
 if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
-  Masonry.displayName = 'Masonry'
+  Masonry.displayName = 'Masonry';
 }

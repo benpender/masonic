@@ -1,5 +1,5 @@
-import {useScroller} from './use-scroller'
-import {useMasonry} from './use-masonry'
+import { useScroller } from './use-scroller';
+import { useMasonry } from './use-masonry';
 
 /**
  * A heavily-optimized component that updates `useMasonry()` when the scroll position of the browser `window`
@@ -9,7 +9,10 @@ export function MasonryScroller(props) {
   // We put this in its own layer because it's the thing that will trigger the most updates
   // and we don't want to slower ourselves by cycling through all the functions, objects, and effects
   // of other hooks
-  const {scrollTop, isScrolling} = useScroller(props.offset, props.scrollFps) // This is an update-heavy phase and while we could just Object.assign here,
+  const {
+    scrollTop,
+    isScrolling
+  } = useScroller(props.offset, props.scrollFps); // This is an update-heavy phase and while we could just Object.assign here,
   // it is way faster to inline and there's a relatively low hit to he bundle
   // size.
 
@@ -33,10 +36,10 @@ export function MasonryScroller(props) {
     itemKey: props.itemKey,
     overscanBy: props.overscanBy,
     height: props.height,
-    render: props.render,
-  })
+    render: props.render
+  });
 }
 
 if (typeof process !== 'undefined' && process.env.NODE_ENV !== 'production') {
-  MasonryScroller.displayName = 'MasonryScroller'
+  MasonryScroller.displayName = 'MasonryScroller';
 }

@@ -1,5 +1,5 @@
-import * as React from 'react'
-import useLayoutEffect from '@react-hook/passive-layout-effect'
+import * as React from 'react';
+import useLayoutEffect from '@react-hook/passive-layout-effect';
 /**
  * A hook for measuring the width of the grid container, as well as its distance
  * from the top of the document. These values are necessary to correctly calculate the number/width
@@ -15,31 +15,31 @@ import useLayoutEffect from '@react-hook/passive-layout-effect'
 export function useContainerPosition(elementRef, deps = emptyArr) {
   const [containerPosition, setContainerPosition] = React.useState({
     offset: 0,
-    width: 0,
-  })
+    width: 0
+  });
   useLayoutEffect(() => {
-    const {current} = elementRef
+    const {
+      current
+    } = elementRef;
 
     if (current !== null) {
-      let offset = 0
-      let el = current
+      let offset = 0;
+      let el = current;
 
       do {
-        offset += el.offsetTop || 0
-        el = el.offsetParent
-      } while (el)
+        offset += el.offsetTop || 0;
+        el = el.offsetParent;
+      } while (el);
 
-      if (
-        offset !== containerPosition.offset ||
-        current.offsetWidth !== containerPosition.width
-      ) {
+      if (offset !== containerPosition.offset || current.offsetWidth !== containerPosition.width) {
         setContainerPosition({
           offset,
-          width: current.offsetWidth,
-        })
+          width: current.offsetWidth
+        });
       }
     } // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, deps)
-  return containerPosition
+
+  }, deps);
+  return containerPosition;
 }
-const emptyArr = []
+const emptyArr = [];
